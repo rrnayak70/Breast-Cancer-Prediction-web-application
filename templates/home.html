@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width", initial-scale="1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>User homepage</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    </head>
+
+    <body style="font-family: 'Lato', sans-serif;">
+        <nav x-data="{ isOpen: false }" class="relative  shadow dark:bg-purple-600 bg-purple-500">
+            <div class="container px-6 py-8 mx-auto md:flex md:justify-between md:items-center">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-2xl font-bold text-white transition-colors duration-300 transform dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300">Breast Cancer Prediction System</h1>
+                    </div>
+    
+                    <!-- Mobile menu button -->
+                    <div class="flex lg:hidden">
+                        <button x-cloak @click="isOpen = !isOpen" type="button" class="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400" aria-label="toggle menu">
+                            <svg x-show="!isOpen" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16" />
+                        </svg>
+    
+                            <svg x-show="isOpen" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                        </button>
+                    </div>
+                </div>
+    
+                <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
+                <div x-cloak :class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']" class="absolute z-20 inset-x-0 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 md:mt-0 md:p-0 md:top-0 md:relative md:bg-transparent md:w-auto md:opacity-100 md:translate-x-0 md:flex md:items-center">
+                    <div class="flex flex-col md:flex-row md:mx-6">
+                        <a class="my-2 text-white transition-colors duration-300 transform dark:text-white-200 hover:text-gray-800 dark:hover:font-bold md:mx-4 md:my-0" href="{{url_for('home')}}">Home</a>
+                        <a class="my-2 text-white transition-colors duration-300 transform dark:text-white-200 hover:text-gray-800 dark:hover:font-bold md:mx-4 md:my-0" href="{{url_for('predict')}}">Predict</a>
+                        <a class="my-2 text-white transition-colors duration-300 transform dark:text-white-200 hover:text-gray-800 dark:hover:font-bold md:mx-4 md:my-0" href="{{url_for('profile')}}">Profile</a>
+                        <a class="my-2 text-white transition-colors duration-300 transform dark:text-white-200 hover:text-gray-800 dark:hover:font-bold md:mx-4 md:my-0" href="{{url_for('logout')}}">Logout</a>
+                    </div>
+    
+    
+                </div>
+            </div>
+        </nav>
+        <main>
+            <section class="bg-white dark:bg-gray-900 mt-12">
+                <div class="container px-6 py-10 mx-auto">
+                    <h1 class="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">Welcome back,  {{ username }}</h1>
+        
+        
+                    <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 md:grid-cols-2 xl:grid-cols-3">
+                        <div class="p-8 space-y-3 border-2 border-blue-400 dark:border-blue-300 rounded-xl">
+                            <span class="inline-block text-blue-500 dark:text-blue-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
+                            </svg>
+                            </span>
+        
+                            <h1 class="text-2xl font-semibold text-gray-700 capitalize dark:text-white">Predict</h1>
+        
+                            <p class="text-gray-500 dark:text-gray-300">
+                                Fill in the value
+                            </p>
+        
+                            <a href="{{url_for('predict')}}" class="inline-flex p-2 rtl:-scale-x-100 text-blue-500 capitalize transition-colors duration-300 transform bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white hover:underline hover:text-blue-600 dark:hover:text-blue-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            </a>
+                        </div>
+        
+                        <div class="p-8 space-y-3 border-2 border-blue-400 dark:border-blue-300 rounded-xl">
+                            <span class="inline-block text-blue-500 dark:text-blue-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+                            </svg>
+                            </span>
+        
+                            <h1 class="text-2xl font-semibold text-gray-700 capitalize dark:text-white">My Profile</h1>
+        
+                            <p class="text-gray-500 dark:text-gray-300">
+                                Check my profile
+                            </p>
+        
+                            <a href="{{url_for('profile')}}" class="inline-flex p-2 rtl:-scale-x-100 text-blue-500 capitalize transition-colors duration-300 transform bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white hover:underline hover:text-blue-600 dark:hover:text-blue-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            </a>
+                        </div>
+        
+
+                    </div>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>
+
